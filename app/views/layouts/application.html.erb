@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>EventTracker</title>
+  <%= stylesheet_link_tag "bootstrap" %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+  
+  <div class="container">
+    <br>
+      <div class="text-right">
+        <% if current_user %>
+          <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary" %>
+          <%= current_user.email %>
+        <% else %>
+          <%= link_to "Login", '/login', class: "btn btn-primary" %>
+          <%= link_to "Signup", '/signup', class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+    <div class="modal-header text-center">
+      <h1>Event Subscriber</h1>
+    </div>
+
+    <% flash.each do |key, value| %><br>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+            
+    <%= yield %>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+
+<div class="page-header">
+	<h2>Welcome#index</h2>
+</div>
+
+<%#= link_to 'Show All Events', controller: 'events' %>
+<%= link_to 'Show All Events', events_path, class: "btn btn-primary" %>
+
+<p>
+	<h3>Genders of Our Users:</h3>
+	<%= column_chart User.group(:gender).count, width: "400px", height: "300px" %>
+</p>
+
+<p>
+	<h3>Geographic Location of Events:</h3>
+	<%= geo_chart Event.group(:country).count, width: "400px", height: "300px"  %>
+</p>
