@@ -12,8 +12,16 @@
 <body>
   
   <div class="container">
-    <br>
-      <div class="text-right">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="glyphicons glyphicons-home"></span>
+      </div>
+
+      <div class="col-md-4">
+        <h1>Event Subscriber</h1>
+      </div>
+
+      <div class="col-md-4" style="margin-top:20px;">
         <% if current_user %>
           <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary" %>
           <%= current_user.email %>
@@ -22,9 +30,6 @@
           <%= link_to "Signup", '/signup', class: "btn btn-primary" %>
         <% end %>
       </div>
-
-    <div class="modal-header text-center">
-      <h1>Event Subscriber</h1>
     </div>
 
     <% flash.each do |key, value| %><br>
