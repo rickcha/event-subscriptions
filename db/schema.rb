@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921093351) do
+ActiveRecord::Schema.define(version: 20160930174332) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -34,8 +37,18 @@ ActiveRecord::Schema.define(version: 20160921093351) do
     t.integer "event_id", null: false
   end
 
-  add_index "events_users", ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
-  add_index "events_users", ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
+  add_index "events_users", ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id", using: :btree
+  add_index "events_users", ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -48,4 +61,5 @@ ActiveRecord::Schema.define(version: 20160921093351) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "posts", "users"
 end
